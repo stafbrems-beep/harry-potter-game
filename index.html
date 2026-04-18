@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wizard Adventure</title>
+</head>
+
+<body style="background:black; color:lime; font-family:monospace; text-align:center;">
+
+<h1>🧙 Wizard Adventure</h1>
+
+<p id="story">Je arriveert op een mysterieuze toverschool...</p>
+<p id="stats">HP: 100</p>
+
+<div id="choices">
+  <button onclick="left()">Ga naar links</button>
+  <button onclick="right()">Ga naar rechts</button>
+</div>
+
+<script>
+let hp = 100;
+
+function updateStats() {
+  document.getElementById("stats").innerHTML = "HP: " + hp;
+}
+
+function left() {
+  document.getElementById("story").innerHTML =
+  "Je vindt een magische staf! Je leert de spreuk 'Lumos'.";
+  
+  document.getElementById("choices").innerHTML =
+  '<button onclick="fight()">Ga verder</button>';
+}
+
+function right() {
+  hp -= 20;
+  updateStats();
+
+  document.getElementById("story").innerHTML =
+  "Een monster valt je aan! Je verliest 20 HP.";
+
+  document.getElementById("choices").innerHTML =
+  '<button onclick="fight()">Vecht terug</button>';
+}
+
+function fight() {
+  let win = Math.random();
+
+  if (win > 0.5) {
+    document.getElementById("story").innerHTML =
+    "Je gebruikt magie en verslaat het monster! 🎉";
+  } else {
+    hp -= 30;
+    updateStats();
+
+    document.getElementById("story").innerHTML =
+    "Je spreuk faalt... je verliest 30 HP!";
+  }
+
+  document.getElementById("choices").innerHTML =
+  '<button onclick="restart()">Opnieuw spelen</button>';
+}
+
+function restart() {
+  hp = 100;
+  updateStats();
+
+  document.getElementById("story").innerHTML =
+  "Je arriveert opnieuw op de toverschool...";
+
+  document.getElementById("choices").innerHTML =
+  '<button onclick="left()">Ga naar links</button>' +
+  '<button onclick="right()">Ga naar rechts</button>';
+}
+</script>
+
+</body>
+</html>
